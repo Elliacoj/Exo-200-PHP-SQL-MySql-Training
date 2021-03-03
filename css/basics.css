@@ -6,8 +6,9 @@ label, select, input{
 
 body{
   background: #FFBB3F;
-  font-family: Calibri, sans-serif;
+  font-family: Arial, sans-serif;
   color: #341401;
+  width: 100%;
 }
 
 th {
@@ -20,3 +21,6 @@ td {
   padding: 10px;
 }
 
+input:nth-child(1), label:nth-child(1) {
+  width: 400px !important;
+}
