@@ -29,15 +29,15 @@ require_once 'include.php';
     if($state) {
         $hikings = [];
         foreach ($search->fetchAll() as $item) {
-            $hikings[] = new Hiking($item['id'], $item['name'], $item['difficulty'], $item['distance'], $item['duration'], $item['height_difference']);
+            $hikings[] = new Hiking($item['id'], $item['name'], $item['difficulty'], $item['distance'], $item['duration'], $item['height_difference'],$item['available']);
         }
     }
-    echo "<table><tr><th>Id</th><th>Name</th><th>Difficulty</th><th>Distance</th><th>Duration</th><th>Height difference</th></tr>";
+    echo "<table><tr><th>Id</th><th>Name</th><th>Difficulty</th><th>Distance</th><th>Duration</th><th>Height difference</th><th>Available</th></tr>";
     foreach ($hikings as $hiking) {
         $modif = base64_encode(json_encode($hiking->getId()));
         echo "<tr><td>" . $hiking->getId() . "</td><td>" . $hiking->getName() . "</td><td>" . $hiking->getDifficulty() .
             "</td><td>" . $hiking->getDistance() . " Km</td><td>" . $hiking->getDuration() . "</td><td>" . $hiking->getHeightDifference() .
-            " m</td><td><a href='update.php?hiking=$modif'>Modifier</a></td></tr>";
+            " m</td><td>" . $hiking->getAvailable() . "</td><td><a href='update.php?hiking=$modif'>Modifier</a></td><td><a href='delete.php?hiking=$modif'>Supprimer</a></td></tr>";
     }
     echo "</table>";
 ?>

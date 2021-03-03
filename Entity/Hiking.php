@@ -9,6 +9,7 @@ class Hiking
     private ?float $distance;
     private ?string $duration;
     private ?string $heightDifference;
+    private ?string $available;
 
     /**
      * Hiking constructor.
@@ -18,8 +19,9 @@ class Hiking
      * @param float|null $distance
      * @param string|null $duration
      * @param string|null $heightDifference
+     * @param string|null $available
      */
-    public function __construct(int $id = null, string $name = null, string $difficulty = null, float $distance = null, string $duration = null, string $heightDifference = null)
+    public function __construct(int $id = null, string $name = null, string $difficulty = null, float $distance = null, string $duration = null, string $heightDifference = null, string $available = null)
     {
         $this->id = $id;
         $this->name = $name;
@@ -27,6 +29,7 @@ class Hiking
         $this->distance = $distance;
         $this->duration = $duration;
         $this->heightDifference = $heightDifference;
+        $this->available = $available;
     }
 
     /**
@@ -117,5 +120,19 @@ class Hiking
         $this->heightDifference = $heightDifference;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getAvailable(): ?string
+    {
+        return $this->available;
+    }
 
+    /**
+     * @param string|null $available
+     */
+    public function setAvailable(?string $available): void
+    {
+        $this->available = $available;
+    }
 }

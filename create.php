@@ -21,16 +21,18 @@ require_once "include.php";
             $distance = $_POST['distance'];
             $duration = $_POST['duration'] . ":00";
             $heightDifference = $_POST['height_difference'];
+            $available = $_POST['available'];
 
             $search = $db->prepare("
-                                INSERT INTO hiking (name, difficulty, distance, duration, height_difference) 
-                                VALUES (:name, :difficulty, :distance, :duration, :heightDifference)
+                                INSERT INTO hiking (name, difficulty, distance, duration, height_difference, available) 
+                                VALUES (:name, :difficulty, :distance, :duration, :heightDifference, :available)
                                 ");
             $search->bindParam(':name', $name);
             $search->bindParam(':difficulty', $difficulty);
             $search->bindParam(':distance', $distance);
             $search->bindParam(':duration', $duration);
             $search->bindParam(':heightDifference', $heightDifference);
+            $search->bindParam(':available', $available);
 
             if($search->execute()) {
                 header("location: create.php?post=ok");
@@ -57,6 +59,7 @@ require_once "include.php";
             <label for="distance">Distance</label>
             <label for="duration">Durée</label>
             <label for="height_difference">Dénivelé</label>
+            <label for="available">Disponible</label>
         </div>
 
         <div>
@@ -71,6 +74,10 @@ require_once "include.php";
             <input type="number" name="distance" id="distance" required step=".01"">
             <input type="time" name="duration" id="duration" required>
             <input type="number" name="height_difference" id="height_difference" required step=".01">
+            <select name="available" id="available" required>
+                <option value="Ok">Ok</option>
+                <option value="notOk">Not ok</option>
+            </select>
             <input type="submit">
         </div>
     </form>

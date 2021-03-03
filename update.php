@@ -33,9 +33,10 @@ if($state) {
             $distance = $_POST['distance'];
             $duration = $_POST['duration'];
             $heightDifference = $_POST['height_difference'];
+            $available = $_POST['available'];
 
             $search = $db->prepare("
-                                UPDATE hiking SET name = :name, difficulty = :difficulty, distance = :distance, duration = :duration, height_difference = :heightDifference
+                                UPDATE hiking SET name = :name, difficulty = :difficulty, distance = :distance, duration = :duration, height_difference = :heightDifference, available = :available
                                 WHERE id = :id
                                 ");
             $search->bindParam(':name', $name);
@@ -43,6 +44,7 @@ if($state) {
             $search->bindParam(':distance', $distance);
             $search->bindParam(':duration', $duration);
             $search->bindParam(':heightDifference', $heightDifference);
+            $search->bindParam(':available', $available);
             $search->bindParam(':id', $hiking);
 
             if($search->execute()) {
@@ -64,6 +66,7 @@ if($state) {
         <label for="distance">Distance</label>
         <label for="duration">Durée</label>
         <label for="height_difference">Dénivelé</label>
+        <label for="available">Disponible</label>
     </div>
 
     <div>
@@ -79,6 +82,11 @@ if($state) {
         <input type="number" name="distance" id="distance" step=".01" required value="<?php echo $result['distance'];?>">
         <input type="time" name="duration" id="duration" required value="<?php echo $result['duration'];?>">
         <input type="number" name="height_difference" id="height_difference" step=".01" required value="<?php echo $result['height_difference'];?>">
+        <select name="available" id="available" required>
+            <option value="base" selected><?php echo $result['available'];?></option>
+            <option value="Ok">Ok</option>
+            <option value="notOk">Not ok</option>
+        </select>
         <input type="submit">
     </div>
 </form>
